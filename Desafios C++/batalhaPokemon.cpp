@@ -13,7 +13,7 @@ int main() {
   if (E > 0) {
     while (E > 0) {
       E = E - P;
-      P = P - 1;
+      P--;
       cont++;
 
       if (P <= 0 && E > 0) {
