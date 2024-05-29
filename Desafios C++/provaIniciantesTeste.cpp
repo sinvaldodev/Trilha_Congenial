@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 int main() {
@@ -12,34 +11,36 @@ int main() {
     }
 
     int* numeros = new int[n];
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         cin >> numeros[i];
     }
 
-    int* verificacao = new int[n];
-    for (int i = 0; i < n; ++i) {
-        verificacao[i] = 1;
+    int* lis = new int[n];
+    for (int i = 0; i < n; i++) {
+        lis[i] = 1;
     }
 
-    for (int i = 1; i < n; ++i) {
-        for (int j = 0; j < i; ++j) {
-            if (numeros[i] > numeros[j]) {
-                verificacao[i] = max(verificacao[i], verificacao[j] + 1);
+    // Calcular o valor LIS
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (numeros[i] > numeros[j] && lis[i] < lis[j] + 1) {
+                lis[i] = lis[j] + 1;
             }
         }
     }
 
-    int longest = verificacao[0];
-    for (int i = 1; i < n; ++i) {
-        if (verificacao[i] > longest) {
-            longest = verificacao[i];
+    // Encontrar o maior valor em lis[]
+    int tamanho = lis[0];
+    for (int i = 1; i < n; i++) {
+        if (lis[i] > tamanho) {
+            tamanho = lis[i];
         }
     }
 
-    cout << longest << endl;
+    cout << tamanho << endl;
 
     delete[] numeros;
-    delete[] verificacao;
+    delete[] lis;
 
     return 0;
 }
